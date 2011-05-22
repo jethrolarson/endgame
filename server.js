@@ -20,6 +20,7 @@ var sass_compile = function (file, path, index, isLast, callback) {
 		callback(file);
 	}
 };
+var dummyTimestamps = 0;
 var assets = assetManager({
 	'js': {
 		'route': /\/static\/js\/[0-9]+\/.*\.js/
@@ -90,16 +91,15 @@ var port = 3000;
 var app = module.exports = express.createServer();
 
 app.configure(function() {
-	app.set('view engine', 'ejs');
+	app.set('view engine', 'jade');
 	app.set('views', __dirname + '/views');
 });
 
 app.configure(function() {
-	app.use(connect.conditionalGet());
-	app.use(connect.bodyDecoder());
+	app.use(connect.bodyParser());
 	app.use(connect.logger({ format: ':req[x-real-ip]\t:status\t:method\t:url\t' }));
 	app.use(assets);
-	app.use(connect.staticProvider(__dirname + '/public'));
+	app.use(connect.static(__dirname + '/public'));
 });
 
 app.dynamicHelpers({
@@ -127,7 +127,7 @@ app.get('/', function(req, res) {
 });
 
 // Keep this just above .listen()
-var dummyTimestamps = new dummyHelper.DummyHelper(app);
+dummyTimestamps = new dummyHelper.DummyHelper(app);
 
 //The 404 route (ALWAYS keep this as the last route)
 app.get('/*', function (req, res) {
@@ -135,4 +135,4 @@ app.get('/*', function (req, res) {
 });
 
 app.listen(port, null);
-new SocketServer(app);
+//new SocketServer(app);

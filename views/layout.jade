@@ -1,0 +1,30 @@
+!!! 5
+html(lang="en", class="no-js")
+head
+  meta(charset="utf-8")
+  title End Game
+  meta(name="description",content="")
+  meta(name="author",content="")
+  meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  link(rel="shortcut icon",href="/favicon.ico")
+  link(rel="apple-touch-icon", href="/apple-touch-icon.png")
+  link(rel="stylesheet",href="/static/css/"+cacheTimeStamps.css+"/style.css?v=2")
+  script(src="js/libs/modernizr-1.6.min.js")
+body
+  #page
+    header#header
+    #content
+      != body
+
+    footer#footer
+  - if (locals.dummyHelperHtml)
+    != dummyHelperHtml
+    
+  script(src="/js/libs/jquery-1.4.2.js")
+  script(src="/js/util.js")
+  script(src="/js/libs/underscore.js")
+  script(src="/js/libs/backbone.js")
+  script(src="/js/templates.js")
+  script(src="/js/application.js")
+  script(src="/js/models.js")
+  script(src="/js/views.js")

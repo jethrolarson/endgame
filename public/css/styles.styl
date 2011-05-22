@@ -1,0 +1,63 @@
+@import 'nib'
+meter-height = 25px
+meter-width = 300px
+m = 10px
+r = 6px
+$bc = #555
+*
+	box-sizing: border-box
+
+dim( x, y)
+	width x
+	height y
+body
+	background-color: #fff
+
+section
+	border: 1px solid $bc
+	display: inline-block
+	vertical-align: bottom
+
+button
+	smooth-button()
+meter
+	dim: meter-width meter-height
+
+.meter
+	display: block
+	dim: meter-width meter-height
+	border: 1px solid #ddd
+	background: #eee
+	position: relative
+	line-height: meter-height
+	user-select: none
+	margin: m 0
+	cursor: pointer
+	user-select: none
+	border-radius: r
+	overflow: hidden
+
+	em
+		z-index: +1
+		display: block
+		position: relative
+		text-align: center
+		pointer-events: none
+		user-select: none
+
+	span
+		position: absolute
+		user-select: none
+		border-radius: r
+		top: 0
+		left: 0
+		background-color: green
+		height: meter-height
+		width: 0
+		display: block
+		transition: width .5s linear
+		pointer-events: none;
+
+	&.on span
+		transition: width 1s linear
+		width: 100%
