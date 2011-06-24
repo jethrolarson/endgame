@@ -14,8 +14,9 @@ window.requestAnimFrame = (->
 	#takes @tm: #string text of template
 	#returns compiled template #function which takes a context as its only param
 ###
-window._tmpl = (txt)->
-	`return new Function("obj","var p=[];(function(){p.push('" +
+`
+window._tmpl = function(txt){
+	return new Function("obj","var p=[];(function(){p.push('" +
 		txt.replace(/[\r\t]/g, " ")
 			.replace(/[\n]/g, "\\n")
 			.replace(/@([\w]+)/g,"<%=this.$1%>")
@@ -28,5 +29,5 @@ window._tmpl = (txt)->
 			.split("%>").join("p.push('")
 			.split("\r").join("\\'")
 		+ "');}).call(obj); return p.join('');");
-	`
 }
+`

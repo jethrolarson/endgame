@@ -1,20 +1,28 @@
 rawtmpls =
 	meter: """
-		<meter min=0 max=<%=this.max||100%> class="@class" title="@name" value="<%=this.value||0%>"></meter>
+		<meter min=0 max=<%=this.max%> class="@class" title="@name @value/@max" value="<%=this.value||0%>"></meter>
 	"""
 	ui: """
-		<div id=ui>
-			<div id="player">Player</div>
-		UI</div>
 	"""
-	player: """
-		<section class="mob player">
+	mob: """
+		<section>
 			<header>@name</header>
-			<%=window.tmpl.meter({"class":"hp",name:"Health",value:100})%>
-			<%=window.tmpl.meter({"class":"mana",name:"Mana",value:90})%>
+			<%=window.tmpl.meter({"class":"hp",name:"Health",value:this.health, max: this.maxHealth})%>
+			<%=window.tmpl.meter({"class":"mana",name:"Mana",value:this.mana, max: this.maxHana})%>
 		</section>
 	"""
-window.real = (vars...)->
+	hotBar: """
+		<ul class="hnav">
+			<%this.abilities.forEach(function(item,i){%>
+				<%=window.tmpl.ability(item)%>
+			<%});%>
+		</ul>
+	"""
+	ability: """
+		<a title="@description">@name</a>
+	"""
+
+real = (vars...)->
 	for v in vars
 		return v if typeof v not 'undefined'
 

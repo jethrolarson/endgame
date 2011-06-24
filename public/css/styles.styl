@@ -1,27 +1,40 @@
 @import 'nib'
+@import 'public/css/_util'
+
 meter-height = 25px
 meter-width = 300px
-m = 10px
-r = 6px
+$m = 10px
+$p = 4px
+$r = 6px
 $bc = #555
 *
 	box-sizing: border-box
+
 
 dim( x, y)
 	width x
 	height y
 body
-	background-color: #fff
-
+	background-color: #222
+	font: 14px/1.5 sans-serif
+	padding: 0
+	margin: 0
+	color: #fff
+#page
+	margin: $m
 section
 	border: 1px solid $bc
 	display: inline-block
 	vertical-align: bottom
+	header
+		padding: $p
+	cursor: pointer
 
 button
 	smooth-button()
 meter
 	dim: meter-width meter-height
+	display: block
 
 .meter
 	display: block
@@ -31,10 +44,10 @@ meter
 	position: relative
 	line-height: meter-height
 	user-select: none
-	margin: m 0
+	margin: $m 0
 	cursor: pointer
 	user-select: none
-	border-radius: r
+	border-radius: $r
 	overflow: hidden
 
 	em
@@ -48,7 +61,7 @@ meter
 	span
 		position: absolute
 		user-select: none
-		border-radius: r
+		border-radius: $r
 		top: 0
 		left: 0
 		background-color: green
@@ -61,3 +74,28 @@ meter
 	&.on span
 		transition: width 1s linear
 		width: 100%
+.hotbar
+	hnav()
+	background: #666
+	padding: $p
+	position: fixed
+	bottom: 0
+	left: 0
+	width: 100%
+	
+	a
+		smooth-button()
+#target
+	position: absolute
+	top: $m
+	left: 320px
+#enemies
+	position: absolute
+	right: $m
+	top: 0
+#console
+	border: 1px solid $bc
+	height: 180px
+	width: 500px
+	overflow: auto;
+	resizable: both

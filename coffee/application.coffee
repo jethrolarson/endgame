@@ -3,5 +3,5 @@ $ ->
 	$('.meter').click ->
 		$(this).toggleClass 'on'
 
-	app = new window.UI 
-		el: $('#content')[0]
+	app = new views.UI 
+		el: $('#page')[0]

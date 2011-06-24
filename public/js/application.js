@@ -4,8 +4,8 @@
     $('.meter').click(function() {
       return $(this).toggleClass('on');
     });
-    return app = new window.UI({
-      el: $('#content')[0]
+    return app = new views.UI({
+      el: $('#page')[0]
     });
   });
 }).call(this);
