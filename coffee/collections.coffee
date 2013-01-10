@@ -1,3 +1,10 @@
 window.collections = {}
-class collections.AllTargets extends Backbone.Collection
+class AllTargets extends Backbone.Collection
 	initialize: ->
+	model: models.Mob
+	clearTargets: ->
+		@models.each (item,i)->
+			
+		
+collections.allTargets = new AllTargets()
+		

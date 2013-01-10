@@ -3,6 +3,7 @@ class models.Mob extends Backbone.Model
 	initialize: ->
 		console.log 'creature init'
 		@set( health: @get 'maxHealth' ) unless @get 'health'
+		collections.allTargets.add this
 	defaults:
 		id: 0
 		name: 'creature 1'
@@ -13,6 +14,7 @@ class models.Mob extends Backbone.Model
 		abilities: []
 		mana: 100
 		maxMana: 100
+		target: null
 
 class models.Player extends models.Mob
 	#abilities

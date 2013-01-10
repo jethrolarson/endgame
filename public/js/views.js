@@ -14,7 +14,7 @@
       UI.__super__.constructor.apply(this, arguments);
     }
     UI.prototype.initialize = function() {
-      window.player = new Player({
+      window.player = new models.Player({
         name: 'Jethro'
       });
       this.allTargets = new collections.AllTargets();
@@ -38,7 +38,7 @@
       var enemies, i;
       enemies = new Backbone.Collection;
       for (i = 0; i <= 5; i++) {
-        enemies.add(new Mob(mobs.goblin));
+        enemies.add(new models.Mob(mobs.goblin));
       }
       this.enemiesView = new views.Enemies({
         collection: enemies
@@ -54,15 +54,15 @@
     }
     Mob.prototype.className = 'mob';
     Mob.prototype.events = {
-      click: 'target'
+      click: 'targetedBy'
     };
-    Mob.prototype.target = function() {
+    Mob.prototype.targetedBy = function() {
       $(this.el).addClass('target');
       return player.set({
         target: this.model
       });
     };
-    Mob.prototype.untarget = function() {
+    Mob.prototype.untargetedBy = function() {
       return $(this.el).removeClass('target');
     };
     Mob.prototype.render = function() {
@@ -70,32 +70,6 @@
       return this;
     };
     return Mob;
-  })();
-  views.Target = (function() {
-    __extends(Target, Backbone.View);
-    function Target() {
-      this.target = __bind(this.target, this);
-      Target.__super__.constructor.apply(this, arguments);
-    }
-    Target.prototype.id = 'target';
-    Target.prototype.initialize = function() {
-      return player.bind('change:target', this.target);
-    };
-    Target.prototype.render = function() {
-      if (this.model) {
-        $(this.el).html(templates.mob(this.model.toJSON()));
-      } else {
-        $(this.el).empty();
-      }
-      return this;
-    };
-    Target.prototype.target = function() {
-      this.model = player.get('target');
-      if (this.model) {
-        return this.render();
-      }
-    };
-    return Target;
   })();
   views.HotBar = (function() {
     __extends(HotBar, Backbone.View);

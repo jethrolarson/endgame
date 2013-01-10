@@ -16,10 +16,11 @@
     Mob.prototype.initialize = function() {
       console.log('creature init');
       if (!this.get('health')) {
-        return this.set({
+        this.set({
           health: this.get('maxHealth')
         });
       }
+      return collections.allTargets.add(this);
     };
     Mob.prototype.defaults = {
       id: 0,
@@ -30,7 +31,8 @@
       maxHealth: 1000,
       abilities: [],
       mana: 100,
-      maxMana: 100
+      maxMana: 100,
+      target: null
     };
     return Mob;
   })();

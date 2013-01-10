@@ -49,7 +49,7 @@ assets = assetManager {
 					callback file
 					dummyTimestamps.content = Date.now()
 			]
-		}
+	}
 	css: {
 		route: /\/static\/css\/[0-9]+\/.*\.css/
 		path: './public/css/'

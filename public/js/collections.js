@@ -1,4 +1,5 @@
 (function() {
+  var AllTargets;
   var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
     for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
     function ctor() { this.constructor = child; }
@@ -8,12 +9,17 @@
     return child;
   };
   window.collections = {};
-  collections.AllTargets = (function() {
+  AllTargets = (function() {
     __extends(AllTargets, Backbone.Collection);
     function AllTargets() {
       AllTargets.__super__.constructor.apply(this, arguments);
     }
     AllTargets.prototype.initialize = function() {};
+    AllTargets.prototype.model = models.Mob;
+    AllTargets.prototype.clearTargets = function() {
+      return this.models.each(function(item, i) {});
+    };
     return AllTargets;
   })();
+  collections.allTargets = new AllTargets();
 }).call(this);

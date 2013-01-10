@@ -2,7 +2,7 @@ window.views = {}
 #this is the master view
 class views.UI extends Backbone.View
 	initialize: ->
-		window.player = new Player
+		window.player = new models.Player
 			name: 'Jethro'
 		@allTargets = new collections.AllTargets()
 		@getEnemies()
@@ -19,7 +19,7 @@ class views.UI extends Backbone.View
 	getEnemies: ->
 		enemies = new Backbone.Collection
 		for i in [0..5]
-			enemies.add new Mob mobs.goblin
+			enemies.add new models.Mob mobs.goblin
 		@enemiesView = new views.Enemies
 			collection: enemies
 		@
@@ -27,31 +27,16 @@ class views.UI extends Backbone.View
 class views.Mob extends Backbone.View
 	className: 'mob'
 	events: 
-		click: 'target'
-	target: ->
+		click: 'targetedBy'
+	targetedBy: ->
 		$(@el).addClass 'target'
 		
 		player.set target: @model
-	untarget: ->
+	untargetedBy: ->
 		$(@el).removeClass 'target'
 	render: ->
 		$(@el).html templates.mob @model.toJSON()
 		@
-
-class views.Target extends Backbone.View
-	id: 'target'
-	initialize: ->
-		player.bind 'change:target', @target
-	render: ->
-		if @model
-			$(@el).html templates.mob @model.toJSON()
-		else
-			$(@el).empty()
-		@
-	target: =>
-		@model = player.get 'target'
-		if @model
-			@render()
 
 class views.HotBar extends Backbone.View
 	className: 'hotbar'
